@@ -26,16 +26,19 @@ function encrypt(text) {
   }
 
   export const signup = async (req, res) => {
-  const { name, mobileNumber, location } = req.body;
+  const { firstName, lastName, mobileNumber, location } = req.body;
 
   try {
+    const encryptedMobileNumber = encrypt(mobileNumber);
+
     let user = await User.findOne({ mobileNumber: encryptedMobileNumber });
     if (user) {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
     user = new User({
-      name,
+      firstName,
+      lastName,
       mobileNumber: encryptedMobileNumber,
       location,
     });
