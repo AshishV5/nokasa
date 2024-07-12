@@ -57,7 +57,12 @@ function encrypt(text) {
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ 
+          success: true,
+          message: "You registered in successful",
+          token: token,
+          body: user
+         });
       }
     );
   } catch (err) {
@@ -95,7 +100,12 @@ export const login = async (req, res) => {
       { expiresIn: 360000 },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ 
+          success: true,
+          message: "You logged in successful.",
+          token: user.token,
+          body: user
+         });
       }
     );
   } catch (err) {
